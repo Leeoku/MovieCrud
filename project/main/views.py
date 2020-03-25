@@ -23,14 +23,15 @@ def create(request):
     return render(request, 'form.html',{'form':form})
 
 def edit(request,pk):
-    movie_id = int(pk)
+    movie_id = MovieEntry.objects.get(id = pk)
     form = MovieForm(request.POST)
     try:
         movie_choice = MovieEntry.objects.get(pk=pk)
+        print(movie_choice)
+        form = MovieForm(instance = movie_choice)
     except MovieEntry.DoesNotExist:
         return redirect('home')
-    if request.method == 'POST':
-        form = MovieEntry(request.POST or None, instance = POST)
     if form.is_valid():
         form.save()
+        return redirect('home')
     return render(request, 'form.html',{'form':form})
