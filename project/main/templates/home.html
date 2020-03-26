@@ -27,7 +27,8 @@
                                     <td>{{movie.price}}</td>
                                     <td><a href = "{% url 'edit' movie.pk%}">
                                         <button class="btn-info btn-sm" >edit</button></td>
-                                    <td><button class="btn-danger btn-sm">delete</button></td>
+                                    <td><a href = "{% url 'delete' movie.pk%}">
+                                        <button class="btn-danger btn-sm">delete</button></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
