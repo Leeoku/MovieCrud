@@ -27,8 +27,11 @@
                                     <td>{{movie.price}}</td>
                                     <td><a href = "{% url 'edit' movie.pk%}">
                                         <button class="btn-info btn-sm" >edit</button></td>
-                                    <td><a href = "{% url 'delete' movie.pk%}">
-                                        <button class="btn-danger btn-sm">delete</button></td>
+                                    <td>
+                                        <form method = "POST" action= {% url 'delete' pk=movie.pk%}>
+                                        {%csrf_token%}
+                                        <button type="submit" class="btn-danger btn-sm" onClick = "return confirm ('Are you sure?')">delete</button>
+                                    </form></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

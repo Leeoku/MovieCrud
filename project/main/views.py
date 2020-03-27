@@ -14,8 +14,6 @@ def create(request):
             #Not initializing db here, instead storing cleaned data for manipulation
             cleanForm = form.cleaned_data
             form.save()
-            #obj = NameFormModel.objects.create(**form.cleaned_data)
-            #movies_json = JsonResponse(cleanForm, safe = False)
             #Always have to futz with dates for one reason or another. This prevents the db from having datetime() instead of your actual date.
             cleanForm["date_watched"] = cleanForm["date_watched"].strftime("%m/%d/%Y")
             return redirect ('create')
@@ -30,7 +28,6 @@ def edit(request, pk):
         form = MovieForm(instance = movie_id)
     except MovieEntry.DoesNotExist:
         return redirect('home')
-    
     if form.is_valid():
         form.save()
         return redirect('home')
@@ -39,12 +36,14 @@ def edit(request, pk):
 
 def delete(request, pk):
     form = MovieForm(request.POST)
+    movies = MovieEntry.objects.all()
     try:
         movie_id = MovieEntry.objects.get(pk=pk)
         form = MovieForm(instance = movie_id)
     except MovieEntry.DoesNotExist:
         return redirect('home')
     if request.method == "POST":
-        movie_id.delete()
-        #return redirect ('home')
-    return render (request, 'form.html',{'form':form})
+        if form.is_valid:
+            movie_id = MovieEntry.objects.get(pk=pk)
+            movie_id.delete()
+    return render(request, 'home.html', {'movies':movies})
