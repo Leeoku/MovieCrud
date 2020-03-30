@@ -22,13 +22,19 @@ def create(request):
     return render(request, 'form.html',{'form':form})
 
 def edit(request, pk):
-    try:
+    '''try:
         movie = get_object_or_404(MovieEntry,pk=pk)
         form = MovieForm(instance = movie)
     except MovieEntry.DoesNotExist:
         return redirect('home')
-    movie = get_object_or_404(MovieEntry,pk=pk)
+    movie = get_object_or_404(MovieEntry,pk=pk)'''
+    movies = MovieEntry.objects.all()
+    if request.method == "GET":
+        movie = get_object_or_404(MovieEntry,pk=pk)
+        form = MovieForm(instance = movie)
+        return render(request, 'form.html',{'form':form})
     if request.method == "POST":
+        movie = get_object_or_404(MovieEntry,pk=pk)
         form = MovieForm(data=request.POST, instance = movie)
         if form.is_valid():
             movie.save()
