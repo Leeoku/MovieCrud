@@ -25,13 +25,16 @@
                                     <td>{{movie.year}}</td>
                                     <td>{{movie.genre}}</td>
                                     <td>{{movie.price}}</td>
-                                    <td><a href = "{% url 'edit' movie.pk%}">
+                                    <td><a href = "{% url 'edit' pk=movie.pk%}">
+                                        <form method = "POST" action= ""></form>
                                         <button class="btn-info btn-sm" >edit</button></td>
+                                        </form>
                                     <td>
                                         <form method = "POST" action= {% url 'delete' pk=movie.pk%}>
                                         {%csrf_token%}
                                         <button type="submit" class="btn-danger btn-sm" onClick = "return confirm ('Are you sure?')">delete</button>
-                                    </form></td>
+                                        </form>
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

@@ -22,28 +22,29 @@ def create(request):
     return render(request, 'form.html',{'form':form})
 
 def edit(request, pk):
-    form = MovieForm(request.POST)
     try:
-        movie_id = MovieEntry.objects.get(pk=pk)
-        form = MovieForm(instance = movie_id)
+        movie = get_object_or_404(MovieEntry,pk=pk)
+        form = MovieForm(instance = movie)
     except MovieEntry.DoesNotExist:
         return redirect('home')
-    if form.is_valid():
-        form.save()
-        return redirect('home')
+    movie = get_object_or_404(MovieEntry,pk=pk)
+    if request.method == "POST":
+        form = MovieForm(data=request.POST, instance = movie)
+        if form.is_valid():
+            movie.save()
+            return render(request, 'home.html', {'movies':movies})
     return render(request, 'form.html',{'form':form})
 
 
 def delete(request, pk):
-    form = MovieForm(request.POST)
-    movies = MovieEntry.objects.all()
     try:
-        movie_id = MovieEntry.objects.get(pk=pk)
-        form = MovieForm(instance = movie_id)
+        movie = MovieEntry.objects.get(pk=pk)
+        form = MovieForm(instance = movie)
+        movies = MovieEntry.objects.all()
     except MovieEntry.DoesNotExist:
         return redirect('home')
     if request.method == "POST":
         if form.is_valid:
-            movie_id = MovieEntry.objects.get(pk=pk)
-            movie_id.delete()
+            movie = MovieEntry.objects.get(pk=pk)
+            movie.delete()
     return render(request, 'home.html', {'movies':movies})
