@@ -22,12 +22,6 @@ def create(request):
     return render(request, 'form.html',{'form':form})
 
 def edit(request, pk):
-    '''try:
-        movie = get_object_or_404(MovieEntry,pk=pk)
-        form = MovieForm(instance = movie)
-    except MovieEntry.DoesNotExist:
-        return redirect('home')
-    movie = get_object_or_404(MovieEntry,pk=pk)'''
     movies = MovieEntry.objects.all()
     if request.method == "GET":
         movie = get_object_or_404(MovieEntry,pk=pk)
@@ -54,3 +48,19 @@ def delete(request, pk):
             movie = MovieEntry.objects.get(pk=pk)
             movie.delete()
     return render(request, 'home.html', {'movies':movies})
+
+'''def search(request, movie_name):
+    movies = MovieEntry.objects.all()
+    print(movies)
+    if request.method == "GET":
+        movies = MovieEntry.objects.get(movie_title = movie_name)
+        print(movies)
+    return render(request, 'home.html', {'movies':movies})'''
+
+def search(request):
+    movies = MovieEntry.objects.all()
+    if request.method == "GET":
+        search_query = request.GET.get('search', None)
+        movies = MovieEntry.objects.filter(movie_title = search_query)
+    #return render(request, 'home.html',{'search_query':search_query})
+    return render(request, 'home.html',{'movies':movies})

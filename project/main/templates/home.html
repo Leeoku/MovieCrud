@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
 {% block content %}
        
 <div class="container-fluid">
@@ -8,13 +10,23 @@
                 <div class="col-md-7">
                     <div class="mb-5 mt-3">
                         <table
-                            class="table text-nowrap text-center table-hover table-bordered table-striped table-condensed table-wrapper-scroll-y my-custom-scrollbar"
+                            class="table text-nowrap text-center table-hover table-bordered table-condensed table-wrapper-scroll-y my-custom-scrollbar table-response-lg"
                             id="table">
                             <thead>
                                 <tr>
                                     <th class="text-center shadow-sm">Movie</th>
-                                    <th class="text-center shadow-sm">Year</th>
+                                    <th class="text-center shadow-sm">DVD</th>
+                                    <th class="text-center shadow-sm">Form</th>
                                     <th class="text-center shadow-sm">Genre</th>
+                                    <th class="text-center shadow-sm">Date</th>
+                                    <th class="text-center shadow-sm">Alt Title 1</th>
+                                    <th class="text-center shadow-sm">Alt Title 2</th>
+                                    <th class="text-center shadow-sm">Count</th>
+                                    <th class="text-center shadow-sm">Director</th>
+                                    <th class="text-center shadow-sm">Writer</th>
+                                    <th class="text-center shadow-sm">Language</th>
+                                    <th class="text-center shadow-sm">Date Watched</th>
+                                    <th class="text-center shadow-sm">Spec</th>
                                     <th class="text-center shadow-sm" colspan=3>Action</th>
                                 </tr>
                             </thead>
@@ -22,9 +34,18 @@
                                 {% for movie in movies %}
                                 <tr class='samplerow'>
                                     <td>{{movie.movie_title}}</td>
-                                    <td>{{movie.year}}</td>
+                                    <td>{{movie.dvd_name}}</td>
+                                    <td>{{movie.form_field}}</td>
                                     <td>{{movie.genre}}</td>
-                                    <td>{{movie.price}}</td>
+                                    <td>{{movie.year}}</td>
+                                    <td>{{movie.alt_title_1}}</td>
+                                    <td>{{movie.alt_title_2}}</td>
+                                    <td>{{movie.count}}</td>
+                                    <td>{{movie.director}}</td>
+                                    <td>{{movie.writer}}</td>
+                                    <td>{{movie.language}}</td>
+                                    <td>{{movie.date_watched}}</td>
+                                    <td>{{movie.spec}}</td>
                                     <td><a href = "{% url 'edit' pk=movie.pk%}">
                                         <form method = "POST" action= ""></form>
                                         <button class="btn-info btn-sm" >edit</button></td>
