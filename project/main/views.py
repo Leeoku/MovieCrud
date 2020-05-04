@@ -9,12 +9,10 @@ def home(request):
 def create(request):
     if request.method == 'POST':
         form = MovieForm(request.POST)
-        #year_model = Year(request.POST)
         if form.is_valid():
-            #Not initializing db here, instead storing cleaned data for manipulation
+            #Create a form for future json manipulation
             cleanForm = form.cleaned_data
             form.save()
-            #Always have to futz with dates for one reason or another. This prevents the db from having datetime() instead of your actual date.
             cleanForm["date_watched"] = cleanForm["date_watched"].strftime("%m/%d/%Y")
             return redirect ('create')
     if request.method == "GET":
@@ -49,18 +47,9 @@ def delete(request, pk):
             movie.delete()
     return render(request, 'home.html', {'movies':movies})
 
-'''def search(request, movie_name):
-    movies = MovieEntry.objects.all()
-    print(movies)
-    if request.method == "GET":
-        movies = MovieEntry.objects.get(movie_title = movie_name)
-        print(movies)
-    return render(request, 'home.html', {'movies':movies})'''
-
 def search(request):
     movies = MovieEntry.objects.all()
     if request.method == "GET":
         search_query = request.GET.get('search', None)
         movies = MovieEntry.objects.filter(movie_title = search_query)
-    #return render(request, 'home.html',{'search_query':search_query})
     return render(request, 'home.html',{'movies':movies})

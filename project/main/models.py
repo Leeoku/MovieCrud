@@ -20,7 +20,7 @@ class MovieEntry(models.Model):
     count  = models.CharField(max_length = 100, blank = True)
     director = models.CharField(max_length = 100, blank = True)
     language = models.CharField(max_length = 100, blank = True)
-    date_watched = models.DateField(auto_now=False, auto_now_add=False)
+    date_watched = models.DateField(auto_now=False, auto_now_add=False, blank = True, null = True)
     spec = models.CharField(max_length = 100, blank = True)
 
     def __str__(self):

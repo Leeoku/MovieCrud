@@ -8,7 +8,6 @@ import datetime
 current_year = datetime.date.today().year
 
 class MovieForm(ModelForm):
-    #required_css_class = 'required'
     class Meta:
         model = MovieEntry
         fields = '__all__'
