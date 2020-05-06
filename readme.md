@@ -8,9 +8,9 @@ This was a request from a movie-loving friend who manually tracks their movie da
 Linux Based Systems
 ```
 1. Ensure Python 3 is installed
-2. python3 -m virtualenv
+2. Create a virtual environment (python3 -m virtualenv)
 3. Ensure to activate the virtualenv (source env/bin/activate)
-4. pip install -r requirements.txt
+4. Install the required packages (pip install -r requirements.txt)
 5. This project was primarily run locally on a Google Chrome Browser. 
     * python3 manage.py makemigrations
     * python3 manage.py migrate
