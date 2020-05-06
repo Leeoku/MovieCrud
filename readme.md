@@ -9,9 +9,9 @@ Linux Based Systems
 ```
 1. Ensure Python 3 is installed
 2. Create a virtual environment (python3 -m virtualenv)
-3. Ensure to activate the virtualenv (source env/bin/activate)
+3. Ensure to activate the virtual environment (source env/bin/activate)
 4. Install the required packages (pip install -r requirements.txt)
-5. This project was primarily run locally on a Google Chrome Browser. 
+5. This project was primarily run locally on a Google Chrome Browser. To run the server, use:
     * python3 manage.py makemigrations
     * python3 manage.py migrate
     * python3 manage.py runserver
