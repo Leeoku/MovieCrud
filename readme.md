@@ -4,6 +4,8 @@ This was a request from a movie-loving friend who manually tracks their movie da
 ![](./image.png)
 
 ## Installation
+
+Linux Based Systems
 ```
 1. Ensure Python 3 is installed
 2. python3 -m virtualenv
